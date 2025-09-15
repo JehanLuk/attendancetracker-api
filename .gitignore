@@ -1,0 +1,18 @@
+# Build & binários
+bin/
+obj/
+
+# Configuração do usuário
+*.user
+*.suo
+*.userosscache
+
+# Visual Studio / VSCode
+.vs/
+.vscode/
+
+# Arquivos de configuração de desenvolvimento
+appsettings.Development.json
+
+# Pacotes NuGet baixados
+*.nupkg
