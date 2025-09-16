@@ -14,9 +14,8 @@ public class AlunoController : ControllerBase
     {
         _cache = cache;
     }
-}
 
-[HttpPost("verificar")]
+    [HttpPost("verificar")]
 public async Task<IActionResult> verificarAlunoAsync([FromBody] AlunoDTO aluno)
 {
     var resultado = new AlunoDTO
@@ -32,3 +31,4 @@ public async Task<IActionResult> verificarAlunoAsync([FromBody] AlunoDTO aluno)
     _cache.Set(aluno.Matricula, resultado, TimeSpan.FromHours(1));
     return Ok(resultado);
 }
+
