@@ -1,13 +1,59 @@
 @page
 @model IndexModel
+@using AttedanceTracker.DTOs;
 @{
     ViewData["Home"] = "Página Inicial";
 }
 
 <h1>@ViewData["Home"]</h1>
-<p>Bem-vindo a página do docente!</Bem-vindo></p>
+<link rel="stylesheet" href="~/css/index.css" />
 
-<p>
-    <a>Conexão com o Sistema de Detecção: </a>
-    <span style="font-weight: bold;">@Model.StatusConexao</span>
-</p>
+<main class="tabelas">
+    <div id="alunosJson">
+        <ul>
+            @foreach (var aluno in Model.Alunos) {
+                <li>
+                    Nome: @aluno.Nome, 
+                    Matrícula: @aluno.Matricula, 
+                    Verificado: @aluno.Verificado,
+                    Data: @aluno.DataHora
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div id="frequenciaFormat">
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Matricula</th>
+                <th>Verificado</th>
+                <th>Data</th>
+            </tr>
+            <tr>
+                <td>
+                    Jean
+                </td>
+                <td>
+                    12354543
+                </td>
+                <td>
+                    true
+                </td>
+                <td>
+                    20/06/2024 15:30
+                </td>
+            </tr>
+        </table>
+        <ol>
+            @foreach (var aluno in Model.Alunos) {
+                <li>
+                    Nome: @aluno.Nome, 
+                    Matrícula: @aluno.Matricula, 
+                    Verificado: @aluno.Verificado,
+                    Data: @aluno.DataHora
+                </li>
+            }
+        </ol>
+    </div>
+</main>

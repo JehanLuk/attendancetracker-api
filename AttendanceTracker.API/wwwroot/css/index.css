@@ -1,0 +1,36 @@
+.tabelas {
+    display: flex;
+    gap: 140px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#alunosJson {
+    position: relative;
+    left: 50px;
+    background-color: rgb(186, 186, 186);
+    height: 400px;
+    width: 600px;
+    overflow-y: scroll;
+}
+
+#frequenciaFormat {
+    background-color: rgb(158, 70, 70);
+    height: 400px;
+    width: 600px;  
+    overflow-y: scroll;
+}
+
+#frequenciaFormat th {
+    background-color: red;
+}
+
+#frequenciaFormat tr {
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    height: 40px;
+    width: 90%;
+    padding: 10px;
+    list-style-position: outside;
+}

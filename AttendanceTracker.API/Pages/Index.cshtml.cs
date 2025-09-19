@@ -1,19 +1,26 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using AttedanceTracker.DTOs;
 public class IndexModel : PageModel
 {
+    public List<AlunoDTO> Alunos { get; set; } = new List<AlunoDTO>();
+    public string StatusConexao { get; set; } = "⏳ Verificando...";
+    public void OnGet()
+    {
+        StatusConexao = "Conectado a API";
+    }
+    /*
     private readonly IHttpClientFactory _httpClientFactory;
 
-        public IndexModel(IHttpClientFactory httpClientFactory)
-        {
-            _httpClientFactory = httpClientFactory;
-        }
+    public IndexModel(IHttpClientFactory httpClientFactory)
+    {
+        _httpClientFactory = httpClientFactory;
+    }
 
-        public string StatusConexao { get; set; } = "⏳ Verificando...";
+    public string StatusConexao { get; set; } = "⏳ Verificando...";
 
-        public async Task OnGetAsync()
-        {
-            var client = _httpClientFactory.CreateClient();
+    public async Task OnGetAsync()
+    {
+        var client = _httpClientFactory.CreateClient();
 
         try
         {
@@ -28,5 +35,5 @@ public class IndexModel : PageModel
         {
             StatusConexao = "❌ Falha na conexão com a API";
         }
-    }
+    }*/
 }
