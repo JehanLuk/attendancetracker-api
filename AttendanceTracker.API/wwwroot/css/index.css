@@ -1,3 +1,19 @@
+.description {
+    font-size: 18px;
+    color: #5f5e5e;
+    line-height: 1.6;
+    margin: 0;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+h1 {
+    padding: 10px;
+    margin: 0;
+    font-weight: bold;
+    font-size: 28px;
+}
+
 .tabelas {
     display: flex;
     gap: 140px;
@@ -8,29 +24,68 @@
 #alunosJson {
     position: relative;
     left: 50px;
-    background-color: rgb(186, 186, 186);
+    background-color: #fff;
     height: 400px;
     width: 600px;
+    box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.25);
     overflow-y: scroll;
+}
+
+#alunosJson pre {
+    margin: 0;
+    margin-top: 10px;
+    background: #222;
+    color: #b5f4a5;
+    padding: 16px;
+    border-radius: 8px;
+    margin-left: 10px;
+    font-size: 1em;
+    font-family: 'Fira Mono', 'Consolas', monospace;
 }
 
 #frequenciaFormat {
-    background-color: rgb(158, 70, 70);
+    background-color: rgb(255, 255, 255);
     height: 400px;
-    width: 600px;  
+    width: 600px;
+    box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.25);
     overflow-y: scroll;
 }
 
-#frequenciaFormat th {
-    background-color: red;
+#frequenciaFormat table {
+    border-collapse: collapse;
+    text-align: center;
+    height: 70px;
+    width: 100%;
+    table-layout: fixed;
 }
 
 #frequenciaFormat tr {
+    height: 45px;
+}
+
+.status-indicador {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%; /* bolinha, remova para quadrado */
+    margin-left: 8px;
+    vertical-align: middle;
+}
+.presente {
+    background: green;
+}
+.ausente {
+    background: red;
+}
+
+#frequenciaFormat th {
+    background-color: rgb(9, 84, 109);
+    color: white;
+}
+#frequenciaFormat td {
     background-color: white;
-    border: none;
-    border-radius: 10px;
-    height: 40px;
-    width: 90%;
-    padding: 10px;
-    list-style-position: outside;
+    border-bottom: 1px solid #ddd;
+}
+#frequenciaFormat th, #frequenciaFormat td {
+    width: auto;
 }

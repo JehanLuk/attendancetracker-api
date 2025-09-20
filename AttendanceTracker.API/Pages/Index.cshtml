@@ -7,19 +7,12 @@
 
 <h1>@ViewData["Home"]</h1>
 <link rel="stylesheet" href="~/css/index.css" />
+<p class="description"> Aqui você pode ver a lista de alunos e suas respectivas informações de frequência.</p>
 
 <main class="tabelas">
     <div id="alunosJson">
-        <ul>
-            @foreach (var aluno in Model.Alunos) {
-                <li>
-                    Nome: @aluno.Nome, 
-                    Matrícula: @aluno.Matricula, 
-                    Verificado: @aluno.Verificado,
-                    Data: @aluno.DataHora
-                </li>
-            }
-        </ul>
+<pre>@System.Text.Json.JsonSerializer.Serialize(Model.Alunos, new System.Text.Json.JsonSerializerOptions { WriteIndented = true })</pre>
+
     </div>
 
     <div id="frequenciaFormat">
@@ -30,30 +23,23 @@
                 <th>Verificado</th>
                 <th>Data</th>
             </tr>
-            <tr>
-                <td>
-                    Jean
-                </td>
-                <td>
-                    12354543
-                </td>
-                <td>
-                    true
-                </td>
-                <td>
-                    20/06/2024 15:30
-                </td>
-            </tr>
-        </table>
-        <ol>
-            @foreach (var aluno in Model.Alunos) {
-                <li>
-                    Nome: @aluno.Nome, 
-                    Matrícula: @aluno.Matricula, 
-                    Verificado: @aluno.Verificado,
-                    Data: @aluno.DataHora
-                </li>
+            @foreach (var aluno in Model.Alunos) 
+            {
+                <tr>
+                    <td>
+                        @aluno.Nome
+                    </td>
+                    <td>
+                        @aluno.Matricula
+                    </td>
+                    <td>
+                        <span class="status-indicador @(aluno.Verificado ? "presente" : "ausente")"></span>
+                    </td>
+                    <td>
+                        @aluno.DataHora
+                    </td>
+                </tr>
             }
-        </ol>
+        </table>
     </div>
 </main>

@@ -9,6 +9,8 @@ namespace AttedanceTracker.Controllers;
 public class AlunoController : ControllerBase
 {
     private readonly IMemoryCache _cache;
+    private const string CacheKey = "Alunos";
+    private static int _idCounter = 1;
 
     public AlunoController(IMemoryCache cache)
     {
@@ -20,6 +22,7 @@ public class AlunoController : ControllerBase
     {
         var resultado = new AlunoDTO
         {
+            Id = _idCounter++,
             Nome = aluno.Nome,
             Matricula = aluno.Matricula,
             Verificado = true,
@@ -28,8 +31,19 @@ public class AlunoController : ControllerBase
 
         await Task.CompletedTask;
 
-        if (aluno.Matricula != null)
-            _cache.Set(aluno.Matricula, resultado, TimeSpan.FromHours(1));
+        // Recupera a lista do cache ou cria uma nova
+        var alunos = _cache.Get<List<AlunoDTO>>(CacheKey) ?? new List<AlunoDTO>();
+        alunos.Add(resultado);
+        _cache.Set(CacheKey, alunos, TimeSpan.FromHours(1));
+
         return Ok(resultado);
+    }
+
+    // Endpoint para listar todos os alunos do cache
+    [HttpGet("listar")]
+    public IActionResult ListarAlunos()
+    {
+        var alunos = _cache.Get<List<AlunoDTO>>(CacheKey) ?? new List<AlunoDTO>();
+        return Ok(alunos);
     }
 }
