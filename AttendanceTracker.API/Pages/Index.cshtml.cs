@@ -22,7 +22,7 @@ public class IndexModel : PageModel
         try
         {
             // Ajuste a URL para o endpoint correto que retorna todos os alunos
-            var response = await client.GetAsync("http://localhost:5132/api/aluno/listar");
+            var response = await client.GetAsync("http://0.0.0.0:5000");
             if (response.IsSuccessStatusCode)
             {
                 var alunos = await response.Content.ReadFromJsonAsync<List<AlunoDTO>>();
