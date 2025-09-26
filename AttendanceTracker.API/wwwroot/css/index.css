@@ -16,14 +16,12 @@ h1 {
 
 .tabelas {
     display: flex;
-    gap: 140px;
+    gap: 100px;
     justify-content: center;
     align-items: flex-start;
 }
 
 #alunosJson {
-    position: relative;
-    left: 50px;
     background-color: #fff;
     height: 400px;
     width: 600px;

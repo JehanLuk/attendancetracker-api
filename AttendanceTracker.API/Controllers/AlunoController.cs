@@ -20,26 +20,29 @@ public class AlunoController : ControllerBase
     [HttpPost("verificar")]
     public async Task<IActionResult> verificarAlunoAsync([FromBody] AlunoDTO aluno)
     {
+        var alunos = _cache.Get<List<AlunoDTO>>(CacheKey) ?? new List<AlunoDTO>();
+        
+        if (alunos.Any(a => a.Nome.Equals(aluno.Nome, StringComparison.OrdinalIgnoreCase)) 
+            && alunos.Any(a => a.Matricula.Equals(aluno.Matricula, StringComparison.OrdinalIgnoreCase)))
+            return BadRequest("Aluno já registrado com esse nome.");
+
         var resultado = new AlunoDTO
         {
             Id = _idCounter++,
             Nome = aluno.Nome,
             Matricula = aluno.Matricula,
-            Verificado = true,
+            Verificado = aluno.Verificado,
             DataHora = DateTime.Now
         };
 
         await Task.CompletedTask;
 
-        // Recupera a lista do cache ou cria uma nova
-        var alunos = _cache.Get<List<AlunoDTO>>(CacheKey) ?? new List<AlunoDTO>();
         alunos.Add(resultado);
         _cache.Set(CacheKey, alunos, TimeSpan.FromHours(1));
 
         return Ok(resultado);
     }
 
-    // Endpoint para listar todos os alunos do cache
     [HttpGet("listar")]
     public IActionResult ListarAlunos()
     {
