@@ -1,12 +1,13 @@
 @page
 @model IndexModel
-@using AttedanceTracker.DTOs;
+@using AttendanceTracker.DTOs;
 @{
     ViewData["Home"] = "Página Inicial";
 }
 
 <h1>@ViewData["Home"]</h1>
 <link rel="stylesheet" href="~/css/index.css" />
+<h3>Status da Conexão: @Model.StatusConexao</h3>
 <p class="description"> Aqui você pode ver a lista de alunos e suas respectivas informações de frequência.</p>
 
 <main class="tabelas">
@@ -21,9 +22,10 @@
                 <th>Nome</th>
                 <th>Matricula</th>
                 <th>Verificado</th>
-                <th>Data</th>
+                <th>Entrada</th>
+                <th>Saída</th>
             </tr>
-            @foreach (var aluno in Model.Alunos) 
+            @foreach (var aluno in Model.Alunos)
             {
                 <tr>
                     <td>
@@ -36,7 +38,10 @@
                         <span class="status-indicador @(aluno.Verificado ? "presente" : "ausente")"></span>
                     </td>
                     <td>
-                        @aluno.DataHora
+                        @aluno.DataHoraEntrada.ToString("dd/MM/yyyy HH:mm")
+                    </td>
+                    <td>
+                        @aluno.DataHoraSaida.ToString("dd/MM/yyyy HH:mm")
                     </td>
                 </tr>
             }

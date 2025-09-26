@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using AttedanceTracker.DTOs;
+using AttendanceTracker.DTOs;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -22,13 +22,13 @@ public class IndexModel : PageModel
         try
         {
             // Ajuste a URL para o endpoint correto que retorna todos os alunos
-            var response = await client.GetAsync("http://0.0.0.0:5000");
+            var response = await client.GetAsync("http://10.0.0.107:5000/api/aluno/listar");
             if (response.IsSuccessStatusCode)
             {
                 var alunos = await response.Content.ReadFromJsonAsync<List<AlunoDTO>>();
                 if (alunos != null)
                     Alunos = alunos;
-                StatusConexao = "✅ Conectado à API de Detecção";
+                StatusConexao = "✅ Conectado ao serviço de detecção";
             }
             else
             {
@@ -37,7 +37,7 @@ public class IndexModel : PageModel
         }
         catch
         {
-            StatusConexao = "❌ Falha na conexão com a API";
+            StatusConexao = "❌ Falha na conexão com o serviço de detecção";
         }
     }
 }

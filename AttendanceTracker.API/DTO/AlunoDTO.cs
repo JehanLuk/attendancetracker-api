@@ -1,4 +1,4 @@
-namespace AttedanceTracker.DTOs;
+namespace AttendanceTracker.DTOs;
 
 public class AlunoDTO
 {
@@ -6,5 +6,6 @@ public class AlunoDTO
     public string Nome { get; set; } = default!;
     public string Matricula { get; set; } = default!;
     public bool Verificado { get; set; } = true;
-    public DateTime DataHora { get; set; }
-}   
+    public DateTime DataHoraEntrada { get; set; }
+    public DateTime DataHoraSaida { get; set; }
+}

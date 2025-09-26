@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using AttedanceTracker.DTOs;
+using AttendanceTracker.DTOs;
+using System.Text.RegularExpressions;
 
-namespace AttedanceTracker.Controllers;
+namespace AttendanceTracker.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -21,10 +22,12 @@ public class AlunoController : ControllerBase
     public async Task<IActionResult> verificarAlunoAsync([FromBody] AlunoDTO aluno)
     {
         var alunos = _cache.Get<List<AlunoDTO>>(CacheKey) ?? new List<AlunoDTO>();
-        
-        if (alunos.Any(a => a.Nome.Equals(aluno.Nome, StringComparison.OrdinalIgnoreCase)) 
-            && alunos.Any(a => a.Matricula.Equals(aluno.Matricula, StringComparison.OrdinalIgnoreCase)))
-            return BadRequest("Aluno já registrado com esse nome.");
+
+        if (!Regex.IsMatch(aluno.Matricula, @"^\d{14}$"))
+            return BadRequest("Matrícula inválida. Deve conter exatamente 14 dígitos numéricos.");
+
+        if (alunos.Any(a => a.Matricula.Equals(aluno.Matricula, StringComparison.OrdinalIgnoreCase)))
+            return BadRequest("Aluno já registrado com essa matricula.");
 
         var resultado = new AlunoDTO
         {
@@ -32,7 +35,8 @@ public class AlunoController : ControllerBase
             Nome = aluno.Nome,
             Matricula = aluno.Matricula,
             Verificado = aluno.Verificado,
-            DataHora = DateTime.Now
+            DataHoraEntrada = DateTime.Now,
+            DataHoraSaida = DateTime.Now
         };
 
         await Task.CompletedTask;
