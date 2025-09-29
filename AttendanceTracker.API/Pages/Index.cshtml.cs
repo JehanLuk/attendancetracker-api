@@ -21,7 +21,6 @@ public class IndexModel : PageModel
         var client = _httpClientFactory.CreateClient();
         try
         {
-            // Ajuste a URL para o endpoint correto que retorna todos os alunos
             var response = await client.GetAsync("http://10.0.0.107:5000/api/aluno/listar");
             if (response.IsSuccessStatusCode)
             {
