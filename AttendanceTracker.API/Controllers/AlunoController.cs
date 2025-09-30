@@ -43,6 +43,7 @@ public class AlunoController : ControllerBase
 
         alunos.Add(resultado);
         _cache.Set(CacheKey, alunos, TimeSpan.FromHours(1));
+        // Zerar a contagem de IDs depois do tempo passar, para evitar overflow
 
         return Ok(resultado);
     }
