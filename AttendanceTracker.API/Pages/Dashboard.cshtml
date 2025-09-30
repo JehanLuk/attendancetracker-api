@@ -10,4 +10,36 @@
 
 <main>
     <p>Aqui vai o conteúdo do dashboard (gráficos, resumos, etc).</p>
+
+
+<div class="cards">
+    <div class="card">Alunos: @ViewData["TotalAlunos"]</div>
+    <div class="card">Professores: @ViewData["TotalProfessores"]</div>
+    <div class="card">Taxa de Presença: @ViewData["TaxaPresenca"]%</div>
+</div>
+
+<!-- Gráfico usando Chart.js -->
+<canvas id="myChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Janeiro', 'Fevereiro', 'Março'],
+            datasets: [{
+                label: 'Presenças',
+                data: [85, 90, 95],
+                backgroundColor: 'rgba(54, 162, 235, 0.5)'
+            }]
+        }
+    });
+</script>
+
+<style>
+    .cards { display: flex; gap: 20px; margin-bottom: 30px; }
+    .card { background: #f3f3f3; padding: 20px; border-radius: 8px; box-shadow: 1px 1px 5px #aaa; }
+</style>
+
 </main>
