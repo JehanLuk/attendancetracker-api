@@ -7,39 +7,48 @@
 
 <h1>@ViewData["Title"]</h1>
 <link rel="stylesheet" href="~/css/dashboard.css" />
+<p class="description">Aqui vai o conteúdo do dashboard (valores, gráficos, anotações e justificativas).</p>
 
 <main>
-    <p>Aqui vai o conteúdo do dashboard (gráficos, resumos, etc).</p>
+    <h2>Disciplina Atual</h2>
+    <div class="cards">
+        <div class="card1">TOTAL DE ALUNOS @ViewData["TotalAlunos"]</div> 
+        <div class="card2">PRESENTES @ViewData["ValorPresentes"]</div>
+        <div class="card3">FALTANTES @ViewData["ValorFaltas"]</div>
+        <div class="card4">ALUNOS EXTRAS @ViewData["ValorAlunoExtra"]</div>
+    </div>
 
+    <!-- Gráfico usando Chart.js -->
+    <h2>Geral</h2>
+    <div class="grafico-tabela">
+        <div class="grafico">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="justanoTabela">
+            <h3>Anotações e Justificativas</h3>
+        </div>
+    </div>
 
-<div class="cards">
-    <div class="card">Alunos: @ViewData["TotalAlunos"]</div>
-    <div class="card">Professores: @ViewData["TotalProfessores"]</div>
-    <div class="card">Taxa de Presença: @ViewData["TaxaPresenca"]%</div>
-</div>
-
-<!-- Gráfico usando Chart.js -->
-<canvas id="myChart" width="400" height="200"></canvas>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const ctx = document.getElementById('myChart');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Janeiro', 'Fevereiro', 'Março'],
-            datasets: [{
-                label: 'Presenças',
-                data: [85, 90, 95],
-                backgroundColor: 'rgba(54, 162, 235, 0.5)'
-            }]
-        }
-    });
-</script>
-
-<style>
-    .cards { display: flex; gap: 20px; margin-bottom: 30px; }
-    .card { background: #f3f3f3; padding: 20px; border-radius: 8px; box-shadow: 1px 1px 5px #aaa; }
-</style>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Disciplina1', 'Disciplina2', 'Disciplina3'],
+                datasets: [
+                    { label: 'Presenças', data: [30, 15, 20], backgroundColor: '#50C35D' },
+                    { label: 'Faltas', data: [5, 10, 7], backgroundColor: '#bd4646ff' },
+                    { label: 'Alunos Extras', data: [2, 3, 1], backgroundColor: '#8750C3' }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // permite controlar altura/largura no CSS
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
 </main>

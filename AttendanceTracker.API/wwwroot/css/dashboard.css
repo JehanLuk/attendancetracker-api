@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+}
+
+h1 {
+    padding: 10px;
+    padding-bottom: 0;
+    margin: 0;
+    font-weight: bold;
+}
+
+h2 {
+    padding: 10px;
+    padding-bottom: 0;
+    margin: 0;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 18px;
+    color: #5f5e5e;
+    line-height: 1.6;
+    margin: 0;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+.grafico-tabela {
+    display: flex;
+    gap: 30px;               
+    justify-content: center; 
+    align-items: flex-start; 
+    margin: 20px;
+}
+
+.grafico {
+    width: 1125px;
+    height: 700px;
+}
+
+.grafico canvas {
+    width: 100% !important;
+    height: 100% !important;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 1px 1px 5px #aaa; 
+}
+
+.cards { 
+    display: flex; 
+    justify-content: space-evenly;
+    padding: 10px;
+    gap: 20px; }
+    .card1 { 
+        background: linear-gradient(90deg, #000000 8%, #fff 5%); 
+        font-size: 20px;
+        padding-top: 10px;
+        padding-left: 25px;
+        width: 200px;
+        height: 140px;
+        border-radius: 8px;
+        box-shadow: 1px 1px 5px #aaa; }
+    .card2 { 
+        background: linear-gradient(90deg, #50C35D 8%, #fff 5%); 
+        font-size: 20px;
+        padding-top: 10px;
+        padding-left: 25px;
+        width: 200px;
+        height: 140px;
+        border-radius: 8px;
+        box-shadow: 1px 1px 5px #aaa; }
+    .card3 { 
+        background: linear-gradient(90deg, #E30000 8%, #fff 5%); 
+        font-size: 20px;
+        padding-top: 10px;
+        padding-left: 25px;
+        width: 200px;
+        height: 140px;
+        border-radius: 8px;
+        box-shadow: 1px 1px 5px #aaa; }
+    .card4 { 
+        background: linear-gradient(90deg, #8750C3 8%, #fff 5%); 
+        font-size: 20px;
+        padding-top: 10px;
+        padding-left: 25px;
+        width: 200px;
+        height: 140px;
+        border-radius: 8px;
+        box-shadow: 1px 1px 5px #aaa; }
+
+.justanoTabela {
+    width: 400px;
+    height: 700px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    box-shadow: 1px 1px 5px #aaa; 
+}

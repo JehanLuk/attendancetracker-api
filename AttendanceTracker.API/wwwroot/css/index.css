@@ -12,7 +12,6 @@ h1 {
     padding-bottom: 0;
     margin: 0;
     font-weight: bold;
-    font-size: 28px;
 }
 
 h3 {
@@ -72,7 +71,7 @@ h3 {
     display: inline-block;
     width: 16px;
     height: 16px;
-    border-radius: 50%; /* bolinha, remova para quadrado */
+    border-radius: 50%;
     margin-left: 8px;
     vertical-align: middle;
 }
