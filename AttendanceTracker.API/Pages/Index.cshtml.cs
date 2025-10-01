@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using AttendanceTracker.DTOs;
+using AttendanceTracker.Models.DTOs;
+using AttendanceTracker.Models.Services;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;

@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using AttendanceTracker.DTOs;
+using AttendanceTracker.Models.DTOs;
 using System.Text.RegularExpressions;
 
-namespace AttendanceTracker.Controllers;
+namespace AttendanceTracker.Models.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

@@ -9,12 +9,21 @@ h1 {
     font-weight: bold;
 }
 
+.nomesOrganizacao {
+    display: flex;
+}
+
 h2 {
     padding: 10px;
     padding-bottom: 0;
     margin: 0;
     font-weight: bold;
     margin-bottom: 10px;
+}
+
+.disciplinaFiltro {
+    margin-left: auto;
+    align-self: center;
 }
 
 .description {
@@ -28,7 +37,7 @@ h2 {
 
 .grafico-tabela {
     display: flex;
-    gap: 30px;               
+    gap: 30px;
     justify-content: center; 
     align-items: flex-start; 
     margin: 20px;
@@ -71,7 +80,7 @@ h2 {
         border-radius: 8px;
         box-shadow: 1px 1px 5px #aaa; }
     .card3 { 
-        background: linear-gradient(90deg, #E30000 8%, #fff 5%); 
+        background: linear-gradient(90deg, #ffd04d 8%, #fff 5%); 
         font-size: 20px;
         padding-top: 10px;
         padding-left: 25px;
@@ -80,6 +89,15 @@ h2 {
         border-radius: 8px;
         box-shadow: 1px 1px 5px #aaa; }
     .card4 { 
+        background: linear-gradient(90deg, #E30000 8%, #fff 5%); 
+        font-size: 20px;
+        padding-top: 10px;
+        padding-left: 25px;
+        width: 200px;
+        height: 140px;
+        border-radius: 8px;
+        box-shadow: 1px 1px 5px #aaa; }
+    .card5 { 
         background: linear-gradient(90deg, #8750C3 8%, #fff 5%); 
         font-size: 20px;
         padding-top: 10px;

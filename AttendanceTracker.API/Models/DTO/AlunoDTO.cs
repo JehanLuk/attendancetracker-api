@@ -1,4 +1,4 @@
-namespace AttendanceTracker.DTOs;
+namespace AttendanceTracker.Models.DTOs;
 
 public class AlunoDTO
 {

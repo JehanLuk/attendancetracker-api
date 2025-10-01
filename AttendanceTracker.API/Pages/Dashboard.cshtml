@@ -1,6 +1,7 @@
 @page
 @model DashboardModel
-@using AttendanceTracker.DTOs;
+@using AttendanceTracker.Models.DTOs;
+@using AttendanceTracker.Models.Services;
 @{
     ViewData["Title"] = "Dashboard";
 }
@@ -12,14 +13,19 @@
 <main>
     <h2>Disciplina Atual</h2>
     <div class="cards">
-        <div class="card1">TOTAL DE ALUNOS @ViewData["TotalAlunos"]</div> 
+        <div class="card1">TOTAL DE ALUNOS @ViewData["TotalAlunos"]</div>
         <div class="card2">PRESENTES @ViewData["ValorPresentes"]</div>
-        <div class="card3">FALTANTES @ViewData["ValorFaltas"]</div>
-        <div class="card4">ALUNOS EXTRAS @ViewData["ValorAlunoExtra"]</div>
+        <div class="card3">DISPENSADOS @ViewData["ValorDispensados"]</div>
+        <div class="card4">FALTANTES @ViewData["ValorFaltas"]</div>
+        <div class="card5">ALUNOS EXTRAS @ViewData["ValorAlunoExtra"]</div>
     </div>
 
     <!-- Gráfico usando Chart.js -->
-    <h2>Geral</h2>
+    <div class="nomesOrganizacao">
+        <h2>Geral</h2>
+        <h2 class="disciplinaFiltro">Filtrar por Disciplina</h2>
+    </div>
+
     <div class="grafico-tabela">
         <div class="grafico">
             <canvas id="myChart"></canvas>
@@ -37,7 +43,8 @@
             data: {
                 labels: ['Disciplina1', 'Disciplina2', 'Disciplina3'],
                 datasets: [
-                    { label: 'Presenças', data: [30, 15, 20], backgroundColor: '#50C35D' },
+                    { label: 'Presenças', data: [10, 15, 20], backgroundColor: '#50C35D' },
+                    { label: 'Dispensos', data: [5, 10, 7], backgroundColor: '#ffd04d' },
                     { label: 'Faltas', data: [5, 10, 7], backgroundColor: '#bd4646ff' },
                     { label: 'Alunos Extras', data: [2, 3, 1], backgroundColor: '#8750C3' }
                 ]
