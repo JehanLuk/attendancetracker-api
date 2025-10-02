@@ -1,0 +1,38 @@
+@page
+@model LoginProfesorModel
+@{
+    ViewData["Title"] = "Login Profesor";
+}
+
+<h2>Registrar Professor</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <label for="Nome">Nome:</label>
+        <input type="text" id="Nome" name="Nome" required />
+    </div>
+    <div>
+        <label for="Foto">Foto:</label>
+        <input type="file" id="Foto" name="Foto" accept="image/*" required />
+    </div>
+    <div>
+        <label for="DataNascimento">Data de Nascimento:</label>
+        <input type="date" id="DataNascimento" name="DataNascimento" required />
+    </div>
+    <div>
+        <label for="Genero">Gênero:</label>
+        <select id="Genero" name="Genero" required>
+            <option value="">Selecione</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option>
+            <option value="Outro">Outro</option>
+        </select>
+    </div>
+    <div>
+        <label for="Matricula">Matrícula:</label>
+        <input type="text" id="Matricula" name="Matricula" required />
+    </div>
+    <div>
+        <button type="submit">Registrar</button>
+    </div>
+</form>
