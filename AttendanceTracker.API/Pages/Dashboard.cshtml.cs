@@ -16,9 +16,9 @@ public class DashboardModel : PageModel
     {
         var alunos = await _alunoService.RetornarTodosAsync();
         ViewData["TotalAlunos"] = alunos.Count();
-        //ViewData["ValorPresentes"] = alunos.Count(a => a.Tipo == "Presente");
-        //ViewData["ValorDispensados"] = alunos.Count(a => a.Tipo == "Dispensado");
-        //ViewData["ValorFaltas"] = alunos.Count(a => a.Tipo == "Falta");
+        ViewData["ValorPresentes"] = alunos.Count(a => a.Verificado == true);
+        //ViewData["ValorDispensados"] = alunos.Count(a => a.Verificado == false);
+        ViewData["ValorFaltas"] = alunos.Count(a => a.Verificado == false);
         //ViewData["ValorAlunoExtra"] = alunos.Count(a => a.Tipo == "Extra");
     }
 }

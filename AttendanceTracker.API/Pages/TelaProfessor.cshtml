@@ -1,39 +1,27 @@
 @page
 @model TelaProfessorModel
 @{
-    ViewData["Title"] = "Login Profesor";
+    ViewData["Title"] = "Registrar Aluno";
 }
 
 <h2>Registrar Aluno</h2>
-<link rel="stylesheet" href="~/css/loginProfessor.css" />
 
-<form method="post" enctype="multipart/form-data">
+<form method="post">
     <div>
         <label for="Nome">Nome:</label>
-        <input type="text" id="Nome" name="Nome" required />
-    </div>
-    <div>
-        <label for="Foto">Foto:</label>
-        <input type="file" id="Foto" name="Foto" accept="image/*" required />
-    </div>
-    <div>
-        <label for="DataNascimento">Data de Nascimento:</label>
-        <input type="date" id="DataNascimento" name="DataNascimento" required />
-    </div>
-    <div>
-        <label for="Genero">Gênero:</label>
-        <select id="Genero" name="Genero" required>
-            <option value="">Selecione</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Feminino">Feminino</option>
-            <option value="Outro">Outro</option>
-        </select>
+        <input type="text" id="Nome" name="Nome" value="@Model.Nome" required />
     </div>
     <div>
         <label for="Matricula">Matrícula:</label>
-        <input type="text" id="Matricula" name="Matricula" required />
+        <input type="text" id="Matricula" name="Matricula" value="@Model.Matricula" required />
     </div>
     <div>
-        <button type="submit">Registrar</button>
+        <button type="submit">Gerar QR Code</button>
     </div>
 </form>
+
+@if (!string.IsNullOrEmpty(Model.QrCodeBase64))
+{
+    <h3>QR Code Gerado:</h3>
+    <img src="data:image/png;base64,@Model.QrCodeBase64" alt="QR Code do Aluno" />
+}
