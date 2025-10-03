@@ -1,14 +1,12 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using AttendanceTracker.Models.DTOs;
 
-namespace AttendanceTracker.Models.Services
+namespace AttendanceTracker.Models.Services;
+
+public interface IAlunoService
 {
-    public interface IAlunoService
-    {
-        Task<IEnumerable<Aluno>> GetAllAsync();
-        Task<Aluno> GetByIdAsync(int id);
-        Task<Aluno> CreateAsync(Aluno aluno);
-        Task<bool> UpdateAsync(int id, Aluno aluno);
-        Task<bool> DeleteAsync(int id);
-    }
+    Task<AlunoDTO?> RegistrarAsync(AlunoDTO aluno);
+    Task<IEnumerable<AlunoDTO>> RetornarTodosAsync();
+    Task<int> RetornarTotalAsync();
+    Task<AlunoDTO?> RetornarPorIdAsync(int id);
 }
+

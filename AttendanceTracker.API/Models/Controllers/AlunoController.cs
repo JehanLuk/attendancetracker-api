@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using AttendanceTracker.Models.DTOs;
+using AttendanceTracker.Models.Services;
 using System.Text.RegularExpressions;
 
 namespace AttendanceTracker.Models.Controllers;
@@ -9,49 +9,48 @@ namespace AttendanceTracker.Models.Controllers;
 [Route("api/[controller]")]
 public class AlunoController : ControllerBase
 {
-    private readonly IMemoryCache _cache;
-    private const string CacheKey = "Alunos";
-    private static int _idCounter = 1;
+    private readonly IAlunoService _alunoService;
 
-    public AlunoController(IMemoryCache cache)
+    public AlunoController(IAlunoService alunoService)
     {
-        _cache = cache;
+        _alunoService = alunoService;
     }
 
     [HttpPost("verificar")]
-    public async Task<IActionResult> verificarAlunoAsync([FromBody] AlunoDTO aluno)
+    public async Task<IActionResult> RegistrarAsync([FromBody] AlunoDTO aluno)
     {
-        var alunos = _cache.Get<List<AlunoDTO>>(CacheKey) ?? new List<AlunoDTO>();
-
         if (!Regex.IsMatch(aluno.Matricula, @"^\d{14}$"))
             return BadRequest("Matrícula inválida. Deve conter exatamente 14 dígitos numéricos.");
 
+        var alunos = await _alunoService.RetornarTodosAsync();
         if (alunos.Any(a => a.Matricula.Equals(aluno.Matricula, StringComparison.OrdinalIgnoreCase)))
-            return BadRequest("Aluno já registrado com essa matricula.");
+            return BadRequest("Aluno já registrado com essa matrícula.");
 
-        var resultado = new AlunoDTO
-        {
-            Id = _idCounter++,
-            Nome = aluno.Nome,
-            Matricula = aluno.Matricula,
-            Verificado = aluno.Verificado,
-            DataHoraEntrada = DateTime.Now,
-            DataHoraSaida = DateTime.Now
-        };
-
-        await Task.CompletedTask;
-
-        alunos.Add(resultado);
-        _cache.Set(CacheKey, alunos, TimeSpan.FromHours(1));
-        // Zerar a contagem de IDs depois do tempo passar, para evitar overflow
-
+        var resultado = await _alunoService.RegistrarAsync(aluno);
         return Ok(resultado);
     }
 
     [HttpGet("listar")]
-    public IActionResult ListarAlunos()
+    public async Task<IActionResult> ListarAlunos()
     {
-        var alunos = _cache.Get<List<AlunoDTO>>(CacheKey) ?? new List<AlunoDTO>();
+        var alunos = await _alunoService.RetornarTodosAsync();
         return Ok(alunos);
+    }
+
+    [HttpGet("total")]
+    public async Task<IActionResult> RetornarTotalAsync()
+    {
+        var total = await _alunoService.RetornarTotalAsync();
+        return Ok(new { total });
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> RetornarPorIdAsync(int id)
+    {
+        var aluno = await _alunoService.RetornarPorIdAsync(id);
+        if (aluno == null)
+            return NotFound(new { message = "Aluno não encontrado." });
+
+        return Ok(aluno);
     }
 }

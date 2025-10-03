@@ -22,7 +22,7 @@ public class IndexModel : PageModel
         var client = _httpClientFactory.CreateClient();
         try
         {
-            var response = await client.GetAsync("http://10.0.0.107:5000/api/aluno/listar");
+            var response = await client.GetAsync("http://localhost:5000/api/aluno/listar");
             if (response.IsSuccessStatusCode)
             {
                 var alunos = await response.Content.ReadFromJsonAsync<List<AlunoDTO>>();

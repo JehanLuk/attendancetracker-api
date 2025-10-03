@@ -1,33 +1,10 @@
 @page
 @model IndexModel
-@using AttendanceTracker.Models.DTOs;
-@using AttendanceTracker.Models.Services;
 @{
     ViewData["Home"] = "Página Inicial";
 }
 
 <h1>@ViewData["Home"]</h1>
-<button id="notificacaoBtn" class="sino-btn" title="Notificações">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2C9.243 2 7 4.243 7 7V10.5C7 13.538 5.462 15.462 4.293 16.293C4.105 16.426 4 16.648 4 16.883V18C4 18.552 4.448 19 5 19H19C19.552 19 20 18.552 20 18V16.883C20 16.648 19.895 16.426 19.707 16.293C18.538 15.462 17 13.538 17 10.5V7C17 4.243 14.757 2 12 2ZM12 22C13.104 22 14 21.104 14 20H10C10 21.104 10.896 22 12 22Z" fill="#333"/>
-    </svg>
-</button>
-<style>
-.sino-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    margin-bottom: 16px;
-    position: relative;
-}
-.sino-btn svg {
-    vertical-align: middle;
-}
-.sino-btn:hover svg path {
-    fill: #0078D4;
-}
-</style>
 <link rel="stylesheet" href="~/css/index.css" />
 <h3>Status da Conexão: @Model.StatusConexao</h3>
 <p class="description"> Aqui você pode ver a lista de alunos e suas respectivas informações de frequência.</p>
