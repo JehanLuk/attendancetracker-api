@@ -1,4 +1,4 @@
-namespace AttendanceTracker.Models.DTOs;
+namespace AttendanceTracker.API.Features.Alunos;
 
 public class AlunoDTO
 {

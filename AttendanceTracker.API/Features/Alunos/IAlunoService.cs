@@ -1,6 +1,4 @@
-using AttendanceTracker.Models.DTOs;
-
-namespace AttendanceTracker.Models.Services;
+namespace AttendanceTracker.API.Features.Alunos;
 
 public interface IAlunoService
 {

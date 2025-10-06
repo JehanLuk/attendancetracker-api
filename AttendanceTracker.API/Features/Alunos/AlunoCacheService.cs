@@ -1,18 +1,20 @@
-using AttendanceTracker.Models.DTOs;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace AttendanceTracker.Models.Services
+namespace AttendanceTracker.API.Features.Alunos
 {
     public class AlunoCacheService : IAlunoService
     {
         private readonly IMemoryCache _cache;
+        private readonly IHubContext<AlunoHub> _hubContext; // Para enviar notificações
         private const string CacheKey = "Alunos";
         private static int _idCounter = 1;
         private static readonly object _lock = new object();
 
-        public AlunoCacheService(IMemoryCache cache)
+        public AlunoCacheService(IMemoryCache cache, IHubContext<AlunoHub> hubContext)
         {
             _cache = cache;
+            _hubContext = hubContext;
         }
 
         public Task<AlunoDTO?> RegistrarAsync(AlunoDTO aluno)
@@ -34,17 +36,36 @@ namespace AttendanceTracker.Models.Services
 
                 alunos.Add(resultado);
 
-                var options = new MemoryCacheEntryOptions
+                _cache.Set(CacheKey, alunos, new MemoryCacheEntryOptions
                 {
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(7)
-                };
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10),
+                    PostEvictionCallbacks =
+                    {
+                        new PostEvictionCallbackRegistration
+                        {
+                            EvictionCallback = (key, value, reason, state) =>
+                            {
+                                lock (_lock)
+                                {
+                                    _idCounter = 1;
+                                    Console.WriteLine("Cache expirou ou foi removido!");
+                                }
 
-                options.RegisterPostEvictionCallback((key, value, reason, state) =>
-                {
-                    lock (_lock) { _idCounter = 1; }
+                                try
+                                {
+                                    _hubContext.Clients.All
+                                        .SendAsync("CacheLimpo", "Cache de alunos foi limpo!")
+                                        .GetAwaiter()
+                                        .GetResult();
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("Erro ao enviar notificação SignalR: " + ex.Message);
+                                }
+                            }
+                        }
+                    }
                 });
-
-                _cache.Set(CacheKey, alunos, options);
             }
 
             return Task.FromResult<AlunoDTO?>(resultado);
@@ -62,7 +83,7 @@ namespace AttendanceTracker.Models.Services
             return Task.FromResult(alunos.Count);
         }
 
-        public Task<AlunoDTO?> RetornarPorIdAsync(int id) 
+        public Task<AlunoDTO?> RetornarPorIdAsync(int id)
         {
             var alunos = _cache.Get<List<AlunoDTO>>(CacheKey) ?? new List<AlunoDTO>();
             var aluno = alunos.FirstOrDefault(a => a.Id == id);

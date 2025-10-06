@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using AttendanceTracker.Models.DTOs;
-using AttendanceTracker.Models.Services;
+using AttendanceTracker.API.Features.Alunos;
 using System.Text.RegularExpressions;
 
-namespace AttendanceTracker.Models.Controllers;
+namespace AttendanceTracker.API.Features.Alunos;
 
 [ApiController]
 [Route("api/[controller]")]

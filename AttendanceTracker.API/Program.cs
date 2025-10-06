@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.OpenApi;
-using AttendanceTracker.Models.Services;
+using AttendanceTracker.API.Features.Alunos;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 
@@ -12,6 +12,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddMemoryCache();
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<IAlunoService, AlunoCacheService>();
+builder.Services.AddSignalR();
 
 builder.Services.AddCors(options =>
 {
@@ -53,6 +54,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapRazorPages();
+
+app.MapHub<AlunoHub>("/alunoHub");
 
 app.MapGet("/", () => Results.Redirect("/Index"));
 

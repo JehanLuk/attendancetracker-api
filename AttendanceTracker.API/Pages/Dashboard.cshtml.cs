@@ -1,4 +1,4 @@
-using AttendanceTracker.Models.Services;
+using AttendanceTracker.API.Features.Alunos;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Linq;
 using System.Threading.Tasks;

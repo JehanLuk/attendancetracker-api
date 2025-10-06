@@ -1,27 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using AttendanceTracker.API.Features.Alunos;
 using QRCoder;
 using System;
 
 public class TelaProfessorModel : PageModel
 {
+    private readonly IAlunoService _alunoService;
+
+    public TelaProfessorModel(IAlunoService alunoService)
+    {
+        _alunoService = alunoService;
+    }
+
     [BindProperty] public string Nome { get; set; } = string.Empty;
     [BindProperty] public string Matricula { get; set; } = string.Empty;
     public string? QrCodeBase64 { get; set; }
 
-    public void OnGet() { }
-
-    public IActionResult OnPost()
+    public async Task<IActionResult> OnPostAsync()
     {
         if (!string.IsNullOrWhiteSpace(Nome) && !string.IsNullOrWhiteSpace(Matricula))
         {
-            string conteudo = $"Aluno: {Nome}, Matrícula: {Matricula}";
+            var aluno = new AlunoDTO { Nome = Nome, Matricula = Matricula };
+            var resultado = await _alunoService.RegistrarAsync(aluno);
 
-            var qrGenerator = new QRCodeGenerator();
-            var qrCodeData = qrGenerator.CreateQrCode(conteudo, QRCodeGenerator.ECCLevel.Q);
+            string conteudo = $"Aluno: {resultado!.Nome}, Matrícula: {resultado.Matricula}";
+            using var qrGenerator = new QRCodeGenerator();
+            using var qrCodeData = qrGenerator.CreateQrCode(conteudo, QRCodeGenerator.ECCLevel.Q);
             var qrCode = new PngByteQRCode(qrCodeData);
-            var qrCodeBytes = qrCode.GetGraphic(20);
-            QrCodeBase64 = Convert.ToBase64String(qrCodeBytes);
+            QrCodeBase64 = Convert.ToBase64String(qrCode.GetGraphic(20));
         }
 
         return Page();
