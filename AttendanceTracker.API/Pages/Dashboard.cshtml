@@ -39,11 +39,11 @@
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Disciplina1', 'Disciplina2', 'Disciplina3'],
+                labels: ['ads', 'Disciplina2', 'Disciplina3'],
                 datasets: [
-                    { label: 'Presenças', data: [10, 15, 20], backgroundColor: '#50C35D' },
+                    { label: 'Presenças', data: [@ViewData["TotalAlunos"], 15, 20], backgroundColor: '#50C35D' },
                     { label: 'Dispensos', data: [5, 10, 7], backgroundColor: '#ffd04d' },
-                    { label: 'Faltas', data: [5, 10, 7], backgroundColor: '#bd4646ff' },
+                    { label: 'Faltas', data: [@ViewData["ValorFaltas"], 10, 7], backgroundColor: '#bd4646ff' },
                     { label: 'Alunos Extras', data: [2, 3, 1], backgroundColor: '#8750C3' }
                 ]
             },

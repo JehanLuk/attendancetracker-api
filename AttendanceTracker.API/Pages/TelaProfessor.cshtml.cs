@@ -17,11 +17,10 @@ public class TelaProfessorModel : PageModel
         {
             string conteudo = $"Aluno: {Nome}, Matrícula: {Matricula}";
 
-            using var qrGenerator = new QRCodeGenerator();
+            var qrGenerator = new QRCodeGenerator();
             var qrCodeData = qrGenerator.CreateQrCode(conteudo, QRCodeGenerator.ECCLevel.Q);
             var qrCode = new PngByteQRCode(qrCodeData);
-
-            byte[] qrCodeBytes = qrCode.GetGraphic(20);
+            var qrCodeBytes = qrCode.GetGraphic(20);
             QrCodeBase64 = Convert.ToBase64String(qrCodeBytes);
         }
 
