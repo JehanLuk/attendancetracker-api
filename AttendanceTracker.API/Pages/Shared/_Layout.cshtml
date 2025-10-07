@@ -14,7 +14,7 @@
                 <button class="user-btn" onclick="location.href='/TelaProfessor'">
                     <img src="~/images/user.png" alt="Usuário" />
                 </button>
-                <button class="sino-btn">
+                <button class="sino-btn" onclick="openModal('@Url.Action("Edit", "User")', 'Edit User')">
                     <img src="~/images/sino.svg" alt="Notificações" />
                 </button>
             </nav>
@@ -29,5 +29,6 @@
         </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/9.0.6/signalr.min.js"></script>
     <script src="~/js/notifications.js"></script>
+    <script src="~/js/modal.js"></script>
 </body>
 </html>
