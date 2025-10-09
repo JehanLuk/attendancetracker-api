@@ -19,3 +19,17 @@ Permite o **registro, listagem e acompanhamento em tempo real** de alunos, com i
 - **QRCoder** - geração de QR Codes para identificação de alunos.
 - **Chart.js** - exibição de dados em gráficos interativos.
 - **OpenAPI (Swagger)** - documentação automática da API.
+
+### Passos no CLI
+
+```bash
+# Clonar o repositório
+git clone https://github.com/JehanLuk/attendancetracker-api.git
+cd attendancetracker-api
+
+# Restaurar dependências
+dotnet restore
+
+# Executar o servidor (localmente)
+dotnet run
+```
