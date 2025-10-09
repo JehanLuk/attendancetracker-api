@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using AttendanceTracker.API.Features.Alunos;
 using System.Text.RegularExpressions;
 
 namespace AttendanceTracker.API.Features.Alunos;
@@ -15,6 +14,7 @@ public class AlunoController : ControllerBase
         _alunoService = alunoService;
     }
 
+    // Bloco de verificação do JSON referente a cada Aluno no Index.html
     [HttpPost("verificar")]
     public async Task<IActionResult> RegistrarAsync([FromBody] AlunoDTO aluno)
     {
@@ -29,6 +29,7 @@ public class AlunoController : ControllerBase
         return Ok(resultado);
     }
 
+    // Bloco de listagem de alunos no Index.html
     [HttpGet("listar")]
     public async Task<IActionResult> ListarAlunos()
     {
@@ -36,6 +37,7 @@ public class AlunoController : ControllerBase
         return Ok(alunos);
     }
 
+    // Bloco de total de alunos no Index.html
     [HttpGet("total")]
     public async Task<IActionResult> RetornarTotalAsync()
     {
@@ -43,6 +45,7 @@ public class AlunoController : ControllerBase
         return Ok(new { total });
     }
 
+    //todo Bloco de aluno específico no Index.html
     [HttpGet("{id}")]
     public async Task<IActionResult> RetornarPorIdAsync(int id)
     {

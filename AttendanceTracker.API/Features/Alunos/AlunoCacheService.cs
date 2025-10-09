@@ -38,7 +38,7 @@ namespace AttendanceTracker.API.Features.Alunos
 
                 _cache.Set(CacheKey, alunos, new MemoryCacheEntryOptions
                 {
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10),
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1),
                     PostEvictionCallbacks =
                     {
                         new PostEvictionCallbackRegistration

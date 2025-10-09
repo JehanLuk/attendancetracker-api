@@ -1,13 +1,14 @@
+/*
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace AttendanceTracker.API.Features.Profesores
+namespace AttendanceTracker.API.Features.Professores
 {
-    [Authorize(Roles = "Profesor")]
+    [Authorize(Roles = "Professor")]
     [Route("api/[controller]")]
     [ApiController]
-    public class ProfesoresController : Controller
+    public class ProfessoresController : Controller
     {
         // GET: /api/profesores/dashboard
         [HttpGet("dashboard")]
@@ -19,7 +20,7 @@ namespace AttendanceTracker.API.Features.Profesores
             // Simulação de dados que seriam exibidos na TelaProfesor.cshtml
             var dashboardInfo = new
             {
-                Nombre = User.Identity.Name,
+                Nome = User.Identity.Name,
                 Materias = new[] { "Matemática", "Física" },
                 TotalAlunos = 120,
                 FaltasHoje = 5
@@ -37,11 +38,11 @@ namespace AttendanceTracker.API.Features.Profesores
             var profesorInfo = new
             {
                 Id = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                Nombre = User.Identity.Name,
+                Nome = User.Identity.Name,
                 Email = User.FindFirstValue(ClaimTypes.Email)
             };
 
             return Ok(profesorInfo);
         }
     }
-}
+} */

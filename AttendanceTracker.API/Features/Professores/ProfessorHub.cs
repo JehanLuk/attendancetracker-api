@@ -1,16 +1,11 @@
-using Microsoft.AspNetCore.SignalR;
-using System.Threading.Tasks;
+/* using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.Authorization;
 
-namespace AttendanceTracker.API.Features.Profesores
+namespace AttendanceTracker.API.Features.Professores
 {
+    [Authorize(Roles = "Admin")]
     public class ProfesorHub : Hub
     {
-        // Envia uma mensagem para todos os clientes conectados
-        public async Task SendMessage(string user, string message)
-        {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-        }
-
         // Notifica quando um professor entra no hub
         public override async Task OnConnectedAsync()
         {
@@ -25,4 +20,4 @@ namespace AttendanceTracker.API.Features.Profesores
             await base.OnDisconnectedAsync(exception);
         }
     }
-}
+}*/
