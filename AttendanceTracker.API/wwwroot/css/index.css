@@ -66,6 +66,9 @@ h3 {
 #frequenciaFormat tr {
     height: 45px;
 }
+#frequenciaFormat th :hover {
+    background-color: #ddd;
+}
 
 .status-indicador {
     display: inline-block;

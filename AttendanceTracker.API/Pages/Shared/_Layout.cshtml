@@ -14,7 +14,7 @@
                 <button class="user-btn" onclick="location.href='/TelaProfessor'">
                     <img src="~/images/user.png" alt="Usuário" />
                 </button>
-                <button class="sino-btn">
+                <button class="sino-btn" onclick="openModal('@Url.Action("Edit", "User")', 'Edit User')">
                     <img src="~/images/sino.svg" alt="Notificações" />
                 </button>
             </nav>
@@ -25,9 +25,11 @@
         </main>
 
         <footer>
-            <p>&copy; 2025 - Sistema Intermediário</del></p>
+            <p>&copy; 2025 - Sistema Intermediário</p>
+            <p>Developed by Joel & Jean</p>
         </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/9.0.6/signalr.min.js"></script>
     <script src="~/js/notifications.js"></script>
+    <script src="~/js/modal.js"></script>
 </body>
 </html>
