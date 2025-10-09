@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // conexão SignalR
+    //conexão SignalR
     const connection = new signalR.HubConnectionBuilder()
         .withUrl("/alunoHub")
         .build();

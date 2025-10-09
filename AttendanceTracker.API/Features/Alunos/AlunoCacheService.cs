@@ -6,7 +6,7 @@ namespace AttendanceTracker.API.Features.Alunos
     public class AlunoCacheService : IAlunoService
     {
         private readonly IMemoryCache _cache;
-        private readonly IHubContext<AlunoHub> _hubContext; // Para enviar notificações
+        private readonly IHubContext<AlunoHub> _hubContext;
         private const string CacheKey = "Alunos";
         private static int _idCounter = 1;
         private static readonly object _lock = new object();
@@ -36,14 +36,14 @@ namespace AttendanceTracker.API.Features.Alunos
 
                 alunos.Add(resultado);
 
-                _cache.Set(CacheKey, alunos, new MemoryCacheEntryOptions
+                var options = new MemoryCacheEntryOptions
                 {
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10),
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(100),
                     PostEvictionCallbacks =
                     {
                         new PostEvictionCallbackRegistration
                         {
-                            EvictionCallback = (key, value, reason, state) =>
+                            EvictionCallback = async (key, value, reason, state) =>
                             {
                                 lock (_lock)
                                 {
@@ -51,21 +51,17 @@ namespace AttendanceTracker.API.Features.Alunos
                                     Console.WriteLine("Cache expirou ou foi removido!");
                                 }
 
-                                try
-                                {
-                                    _hubContext.Clients.All
-                                        .SendAsync("CacheLimpo", "Cache de alunos foi limpo!")
-                                        .GetAwaiter()
-                                        .GetResult();
-                                }
-                                catch (Exception ex)
-                                {
+                                try {
+                                    await _hubContext.Clients.All.SendAsync("CacheLimpo", "Cache de alunos foi limpo!");
+                                } catch (Exception ex) {
                                     Console.WriteLine("Erro ao enviar notificação SignalR: " + ex.Message);
                                 }
                             }
                         }
                     }
-                });
+                };
+
+                _cache.Set(CacheKey, alunos, options);
             }
 
             return Task.FromResult<AlunoDTO?>(resultado);

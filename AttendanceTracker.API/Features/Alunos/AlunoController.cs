@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using AttendanceTracker.API.Features.Alunos;
 using System.Text.RegularExpressions;
 
 namespace AttendanceTracker.API.Features.Alunos;
