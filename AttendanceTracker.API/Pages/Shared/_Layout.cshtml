@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="~/images/logo.png"/>
@@ -14,9 +14,15 @@
                 <button class="user-btn" onclick="location.href='/TelaProfessor'">
                     <img src="~/images/user.png" alt="Usuário" />
                 </button>
-                <button class="sino-btn" onclick="openModal('@Url.Action("Edit", "User")', 'Edit User')">
+                <button class="sino-btn" id="notificationBtn" type="button">
                     <img src="~/images/sino.svg" alt="Notificações" />
                 </button>
+                <span class="badge" id="notificationBadge">0</span>
+                <div id="notificationPopup" class="notification-popup" style="display:none;">
+                    <h4>Notificações</h4>
+                    <ul id="notificationList">
+                    </ul>
+                </div>
             </nav>
         </header>
 
@@ -25,11 +31,10 @@
         </main>
 
         <footer>
-            <p>&copy; 2025 - Sistema Intermediário</p>
-            <p>Developed by Joel & Jean</p>
+            <p>&copy; 2025 - Sistema Intermediário, Developed by Joel & Jean</p>
         </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/9.0.6/signalr.min.js"></script>
     <script src="~/js/notifications.js"></script>
-    <script src="~/js/modal.js"></script>
+    <script src="~/js/popup.js"></script>
 </body>
 </html>

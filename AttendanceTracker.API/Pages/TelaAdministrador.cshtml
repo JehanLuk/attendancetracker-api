@@ -1,0 +1,58 @@
+@page
+@model TelaAdministrador
+@{
+    ViewData["Title"] = "Tela do Administrador";
+}
+<div>
+    <h2>Bem-vindo à Tela do Administrador</h2>
+    <p>numero de usuarios: @Model.NumeroDeUsuarios</p>
+    <div>
+        <h3>Usuários Recentes</h3>
+        <ul>
+            @foreach (var usuario in Model.UsuariosRecentes)
+            {
+                <li>@usuario.Nome - @usuario.DataDeCadastro.ToShortDateString()</li>
+            }
+        </ul>
+    </div>
+    <p>usuarios cadastrados: @Model.UsuariosCadastrados</p>
+    <p>usuarios ativos: @Model.UsuariosAtivos</p>
+    <div>
+        <h3>Relatórios de Atividade</h3>
+        <ul>
+            @foreach (var relatorio in Model.RelatoriosDeAtividade)
+            {
+                <li>@relatorio.Titulo - @relatorio.Data.ToShortDateString()</li>
+            }
+        </ul>
+    </div>
+    <p>json dos usuarios: @Html.Raw(Json.Serialize(Model.UsuariosRecentes))</p>
+    <div>
+        <h3>Usuários Recentes (JSON)</h3>
+        <pre>@Html.Raw(Json.Serialize(Model.UsuariosRecentes))</pre>
+    </div>
+    <p>administração dos usuarios</p>
+    <div>
+        <a asp-page="/GerenciarUsuarios">Gerenciar Usuários</a>
+    </div>
+    <div>
+        <a asp-page="/Relatorios">Ver Relatórios Detalhados</a>
+    </div>
+    <p>monitoramento de rotas do sistemas</p>
+    //grafico de uso do sistema
+    <div class="garfico"></div>
+    <p>atualizações do sistema e usuarios</p>
+    <input type="text" placeholder="Buscar usuários..." />
+    <button type="submit">Buscar</button>
+    <div>
+        <h3>Resultados da Busca</h3>
+        <ul>
+            @foreach (var usuario in Model.ResultadosDaBusca)
+            {
+                <li>@usuario.Nome - @usuario.DataDeCadastro.ToShortDateString()</li>
+            }
+        </ul>
+    </div>
+    // caixa de mensagens administrativas
+    <div class="mensagens"></div>
+</div>

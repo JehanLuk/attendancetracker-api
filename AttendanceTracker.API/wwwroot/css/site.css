@@ -90,3 +90,46 @@ footer {
     padding: 10px;
 }
 
+.notification-popup {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    width: 250px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+    padding: 16px;
+}
+.notification-popup h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+.notification-popup ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.notification-popup li {
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.98em;
+}
+.notification-popup li:last-child {
+    border-bottom: none;
+}
+
+.badge {
+  position: absolute;
+  top: 8px;
+  right: 60px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+  line-height: 1;
+  display: none; /* Hidden by default, shown when notifications exist */
+}

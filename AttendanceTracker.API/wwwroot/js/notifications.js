@@ -1,39 +1,64 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const sinoBtn = document.querySelector(".sino-btn");
-    let container;
+document.addEventListener('DOMContentLoaded', function () {
+    const notificationBadge = document.getElementById('notificationBadge');
+    const ul = document.getElementById('notificationList');
+    const popup = document.getElementById('notificationPopup');
+    const btn = document.getElementById('notificationBtn');
 
-    sinoBtn.addEventListener("click", function() {
-        if (!container) {
-            container = document.createElement("div");
-            container.id = "notificacoes";
-            container.className = "container-notificacoes";
-            container.style.display = "block"; 
-            document.body.appendChild(container);
-        } else {
-            container.style.display = container.style.display === "none" ? "block" : "none";
-        }
-    });
+    let notificationCount = parseInt(localStorage.getItem('notificationCount')) || 0;
 
-    //conexão SignalR
+    function updateNotificationCount(newCount) {
+        notificationCount = newCount;
+        notificationBadge.textContent = notificationCount;
+        notificationBadge.style.display = notificationCount > 0 ? 'block' : 'none';
+        localStorage.setItem('notificationCount', notificationCount);
+    }
+
+    function saveNotification(mensagem) {
+        let saved = JSON.parse(localStorage.getItem('notifications')) || [];
+        saved.push(mensagem);
+        localStorage.setItem('notifications', JSON.stringify(saved));
+    }
+
+    function loadSavedNotifications() {
+        const saved = JSON.parse(localStorage.getItem('notifications')) || [];
+        ul.innerHTML = '';
+        saved.forEach(msg => {
+            const li = document.createElement('li');
+            li.textContent = msg;
+            ul.appendChild(li);
+        });
+    }
+
     const connection = new signalR.HubConnectionBuilder()
         .withUrl("/alunoHub")
         .build();
 
-    connection.on("CacheLimpo", function(message) {
-        if (!container) {
-            container = document.createElement("div");
-            container.id = "notificacoes";
-            container.className = "container-notificacoes";
-            document.body.appendChild(container);
-        }
+    connection.start().catch(err => console.error(err.toString()));
 
-        const div = document.createElement("div");
-        div.className = "notificacao";
-        div.innerText = message;
-
-        container.appendChild(div);
-        setTimeout(() => div.remove(), 5000);
+    connection.on("CacheLimpo", function (mensagem) {
+        saveNotification(mensagem);
+        loadSavedNotifications();
+        updateNotificationCount(notificationCount + 1);
     });
 
-    connection.start().catch(err => console.error(err.toString()));
+    loadSavedNotifications();
+    updateNotificationCount(notificationCount);
+
+    btn.addEventListener('click', () => {
+        const isHidden = popup.style.display === 'none' || popup.style.display === '';
+
+        if (isHidden) {
+            popup.style.display = 'block';
+
+            updateNotificationCount(0);
+        } else {
+            popup.style.display = 'none';
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (popup.style.display === 'block' && !popup.contains(e.target) && e.target !== btn) {
+            popup.style.display = 'none';
+        }
+    });
 });
