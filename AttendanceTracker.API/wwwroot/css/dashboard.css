@@ -107,11 +107,17 @@ h2 {
         border-radius: 8px;
         box-shadow: 1px 1px 5px #aaa; }
 
+#number {
+    font-size: 50px;
+    font-weight: 400;
+    margin-top: 25px;
+}
+
 .justanoTabela {
     width: 400px;
     height: 700px;
     background-color: #fff;
     display: flex;
     justify-content: center;
-    box-shadow: 1px 1px 5px #aaa; 
+    box-shadow: 1px 1px 5px #aaa;
 }

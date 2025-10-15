@@ -83,7 +83,7 @@ namespace AttendanceTracker.API.Features.Alunos
         {
             var alunos = _cache.Get<List<AlunoDTO>>(CacheKey) ?? new List<AlunoDTO>();
             var aluno = alunos.FirstOrDefault(a => a.Id == id);
-            return Task.FromResult<AlunoDTO?>(aluno);
+            return Task.FromResult(aluno);
         }
     }
 }

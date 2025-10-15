@@ -11,11 +11,11 @@
 <main>
     <h2>Disciplina Atual</h2>
     <div class="cards">
-        <div class="card1">TOTAL DE ALUNOS @ViewData["TotalAlunos"]</div>
-        <div class="card2">PRESENTES @ViewData["ValorPresentes"]</div>
-        <div class="card3">DISPENSADOS @ViewData["ValorDispensados"]</div>
-        <div class="card4">FALTANTES @ViewData["ValorFaltas"]</div>
-        <div class="card5">ALUNOS EXTRAS @ViewData["ValorAlunoExtra"]</div>
+        <div class="card1">TOTAL DE ALUNOS <div id="number">@ViewData["TotalAlunos"]</div></div>
+        <div class="card2">PRESENTES <div id="number">@ViewData["ValorPresentes"]</div></div>
+        <div class="card3">DISPENSADOS <div id="number">@ViewData["ValorDispensados"]</div></div>
+        <div class="card4">FALTANTES <div id="number">@ViewData["ValorFaltas"]</div></div>
+        <div class="card5">ALUNOS EXTRAS <div id="number">@ViewData["ValorAlunoExtra"]</div></div>
     </div>
 
     <!-- Gráfico usando Chart.js -->

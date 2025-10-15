@@ -3,5 +3,6 @@ public class TelaAdministrador : PageModel
 {
     public void OnGet()
     {
+        //
     }
 }

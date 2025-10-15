@@ -1,0 +1,35 @@
+{
+  "version": 3,
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/Index.cshtml"
+    },
+    {
+      "src": "/Dashboard",
+      "dest": "/Dashboard.cshtml"
+    },
+    {
+      "src": "/TelaProfessor",
+      "dest": "/TelaProfessor.cshtml"
+    },
+    {
+      "src": "/TelaAdministrador",
+      "dest": "/TelaAdministrador.cshtml"
+    },
+    {
+      "src": "/Contato",
+      "dest": "/Contato.html"
+    },
+    {
+      "src": "/Quem-Somos",
+      "dest": "/Sobre",
+      "status": 308
+    },
+    {
+      "src": "/Servicos/Desenvolvimento-web",
+      "dest": "/Servicos#web",
+      "status": 307
+    }
+  ]
+}
