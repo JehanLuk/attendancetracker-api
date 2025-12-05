@@ -27,7 +27,7 @@ public class TelaProfessorModel : PageModel
 
         await Task.CompletedTask;
 
-        string conteudo = $"Aluno: {Nome}, Matrícula: {Matricula}";
+        string conteudo = """Nome": "{Nome}"", ""Matricula: {Matricula}""";
         using var qrGenerator = new QRCodeGenerator();
         using var qrCodeData = qrGenerator.CreateQrCode(conteudo, QRCodeGenerator.ECCLevel.Q);
         var qrCode = new PngByteQRCode(qrCodeData);

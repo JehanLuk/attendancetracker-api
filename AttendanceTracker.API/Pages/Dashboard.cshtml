@@ -34,26 +34,154 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('myChart');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['ads', 'Disciplina2', 'Disciplina3'],
-                datasets: [
-                    { label: 'Presenças', data: [@ViewData["TotalAlunos"], 15, 20], backgroundColor: '#50C35D' },
-                    { label: 'Dispensos', data: [5, 10, 7], backgroundColor: '#ffd04d' },
-                    { label: 'Faltas', data: [@ViewData["ValorFaltas"], 10, 7], backgroundColor: '#bd4646ff' },
-                    { label: 'Alunos Extras', data: [2, 3, 1], backgroundColor: '#8750C3' }
-                ]
+<script>
+// Dados iniciais das disciplinas
+let disciplinasData = {
+    'ADS': {
+        presencas: parseInt('@ViewData["TotalAlunos"]') || 0,
+        dispensos: 5,
+        faltas: parseInt('@ViewData["ValorFaltas"]') || 0,
+        alunosExtras: 2
+    },
+    'Disciplina2': {
+        presencas: 15,
+        dispensos: 10,
+        faltas: 10,
+        alunosExtras: 3
+    },
+    'Disciplina3': {
+        presencas: 20,
+        dispensos: 7,
+        faltas: 7,
+        alunosExtras: 1
+    }
+};
+
+let myChart;
+
+// Função para inicializar o gráfico
+function inicializarGrafico() {
+    const ctx = document.getElementById('myChart');
+    
+    const disciplinas = Object.keys(disciplinasData);
+    const presencas = disciplinas.map(d => disciplinasData[d].presencas);
+    const dispensos = disciplinas.map(d => disciplinasData[d].dispensos);
+    const faltas = disciplinas.map(d => disciplinasData[d].faltas);
+    const alunosExtras = disciplinas.map(d => disciplinasData[d].alunosExtras);
+
+    myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: disciplinas,
+            datasets: [
+                { 
+                    label: 'Presenças', 
+                    data: presencas, 
+                    backgroundColor: '#50C35D' 
+                },
+                { 
+                    label: 'Dispensos', 
+                    data: dispensos, 
+                    backgroundColor: '#ffd04d' 
+                },
+                { 
+                    label: 'Faltas', 
+                    data: faltas, 
+                    backgroundColor: '#bd4646ff' 
+                },
+                { 
+                    label: 'Alunos Extras', 
+                    data: alunosExtras, 
+                    backgroundColor: '#8750C3' 
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { 
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Quantidade de Alunos'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Disciplinas'
+                    }
+                }
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false, // permite controlar altura/largura no CSS
-                scales: {
-                    y: { beginAtZero: true }
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Distribuição de Alunos por Disciplina'
                 }
             }
-        });
-    </script>
-</main>
+        }
+    });
+}
+
+// Função para adicionar novo aluno
+function adicionarAluno(disciplina, tipo) {
+    if (disciplinasData[disciplina]) {
+        disciplinasData[disciplina][tipo]++;
+        atualizarGrafico();
+    } else {
+        console.error('Disciplina não encontrada:', disciplina);
+    }
+}
+
+// Função para adicionar nova disciplina
+function adicionarDisciplina(nomeDisciplina, dadosIniciais = {}) {
+    disciplinasData[nomeDisciplina] = {
+        presencas: dadosIniciais.presencas || 0,
+        dispensos: dadosIniciais.dispensos || 0,
+        faltas: dadosIniciais.faltas || 0,
+        alunosExtras: dadosIniciais.alunosExtras || 0
+    };
+    atualizarGrafico();
+}
+
+// Função para atualizar o gráfico
+function atualizarGrafico() {
+    const disciplinas = Object.keys(disciplinasData);
+    const presencas = disciplinas.map(d => disciplinasData[d].presencas);
+    const dispensos = disciplinas.map(d => disciplinasData[d].dispensos);
+    const faltas = disciplinas.map(d => disciplinasData[d].faltas);
+    const alunosExtras = disciplinas.map(d => disciplinasData[d].alunosExtras);
+
+    myChart.data.labels = disciplinas;
+    myChart.data.datasets[0].data = presencas;
+    myChart.data.datasets[1].data = dispensos;
+    myChart.data.datasets[2].data = faltas;
+    myChart.data.datasets[3].data = alunosExtras;
+    
+    myChart.update();
+}
+
+// Função para obter estatísticas
+function obterEstatisticas() {
+    const totalPorDisciplina = {};
+    
+    Object.keys(disciplinasData).forEach(disciplina => {
+        const dados = disciplinasData[disciplina];
+        totalPorDisciplina[disciplina] = {
+            total: dados.presencas + dados.dispensos + dados.faltas + dados.alunosExtras,
+            ...dados
+        };
+    });
+    
+    return totalPorDisciplina;
+}
+
+// Inicializar o gráfico quando a página carregar
+document.addEventListener('DOMContentLoaded', function() {
+    inicializarGrafico();
+});
+</script>

@@ -10,16 +10,12 @@ namespace AttendanceTracker.Models
 
         [Required]
         [StringLength(100)]
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
 
         [Required]
         [EmailAddress]
         [StringLength(150)]
-        public string Email { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Perfil { get; set; } // "Administrador", "Usuário", "Moderador"
+        public string? Email { get; set; }
 
         public bool Ativo { get; set; } = true;
 
@@ -28,8 +24,8 @@ namespace AttendanceTracker.Models
         public DateTime? UltimoAcesso { get; set; }
 
         // Navigation properties
-        public virtual ICollection<LogAcesso> LogsAcesso { get; set; }
-        public virtual ICollection<Ticket> Tickets { get; set; }
+        public virtual ICollection<LogAcesso>? LogsAcesso { get; set; }
+        public virtual ICollection<Ticket>? Tickets { get; set; }
     }
 
     public class Relatorio
@@ -39,20 +35,20 @@ namespace AttendanceTracker.Models
 
         [Required]
         [StringLength(200)]
-        public string Titulo { get; set; }
+        public string? Titulo { get; set; }
 
         public DateTime DataCriacao { get; set; } = DateTime.Now;
 
         [StringLength(50)]
-        public string Tipo { get; set; } // "Mensal", "Performance", "Segurança", "Usuários"
+        public string? Tipo { get; set; } // "Mensal", "Performance", "Segurança", "Usuários"
 
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
 
         [StringLength(20)]
         public string Status { get; set; } = "Concluído";
 
         // Navigation properties
-        public virtual ICollection<ItemRelatorio> Itens { get; set; }
+        public virtual ICollection<ItemRelatorio>? Itens { get; set; }
     }
 
     public class ItemRelatorio
@@ -63,13 +59,13 @@ namespace AttendanceTracker.Models
         public int RelatorioId { get; set; }
 
         [StringLength(500)]
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
 
-        public string Valor { get; set; }
+        public string? Valor { get; set; }
 
         // Navigation property
         [ForeignKey("RelatorioId")]
-        public virtual Relatorio Relatorio { get; set; }
+        public virtual Relatorio? Relatorio { get; set; }
     }
 
     public class LogAcesso
@@ -82,14 +78,14 @@ namespace AttendanceTracker.Models
         public DateTime DataAcesso { get; set; } = DateTime.Now;
 
         [StringLength(50)]
-        public string Acao { get; set; } // "Login", "Logout", "AcessoPagina"
+        public string? Acao { get; set; } // "Login", "Logout", "AcessoPagina"
 
         [StringLength(500)]
-        public string Detalhes { get; set; }
+        public string? Detalhes { get; set; }
 
         // Navigation property
         [ForeignKey("UsuarioId")]
-        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario? Usuario { get; set; }
     }
 
     public class Ticket
@@ -101,9 +97,9 @@ namespace AttendanceTracker.Models
 
         [Required]
         [StringLength(200)]
-        public string Titulo { get; set; }
+        public string? Titulo { get; set; }
 
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
 
         public StatusTicket Status { get; set; } = StatusTicket.Aberto;
 
@@ -113,7 +109,7 @@ namespace AttendanceTracker.Models
 
         // Navigation property
         [ForeignKey("UsuarioId")]
-        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario? Usuario { get; set; }
     }
 
     public enum StatusTicket
@@ -131,15 +127,15 @@ namespace AttendanceTracker.Models
 
         [Required]
         [StringLength(50)]
-        public string Tipo { get; set; } // "Aviso", "Erro", "Informação"
+        public string? Tipo { get; set; } // "Aviso", "Erro", "Informação"
 
         [Required]
-        public string Mensagem { get; set; }
+        public string? Mensagem { get; set; }
 
         public DateTime DataCriacao { get; set; } = DateTime.Now;
 
         [StringLength(20)]
-        public string Criticidade { get; set; } // "Baixa", "Média", "Alta"
+        public string? Criticidade { get; set; } // "Baixa", "Média", "Alta"
 
         public bool Resolvido { get; set; } = false;
 
@@ -149,7 +145,7 @@ namespace AttendanceTracker.Models
 
         // Navigation property
         [ForeignKey("ResolvidoPor")]
-        public virtual Usuario UsuarioResolucao { get; set; }
+        public virtual Usuario? UsuarioResolucao { get; set; }
     }
 
     public class Permissao
@@ -159,13 +155,13 @@ namespace AttendanceTracker.Models
 
         [Required]
         [StringLength(50)]
-        public string Perfil { get; set; }
+        public string? Perfil { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
 
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
     }
 
     public class RelatorioExportacao
@@ -175,7 +171,7 @@ namespace AttendanceTracker.Models
 
         [Required]
         [StringLength(50)]
-        public string TipoRelatorio { get; set; }
+        public string? TipoRelatorio { get; set; }
 
         public DateTime? DataInicio { get; set; }
 
@@ -194,12 +190,12 @@ namespace AttendanceTracker.Models
         public string Status { get; set; } = "Processando"; // "Processando", "Concluído", "Erro"
 
         [StringLength(200)]
-        public string ArquivoGerado { get; set; }
+        public string? ArquivoGerado { get; set; }
 
-        public string MensagemErro { get; set; }
+        public string? MensagemErro { get; set; }
 
         // Navigation property
         [ForeignKey("UsuarioId")]
-        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario? Usuario { get; set; }
     }
 }
